@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio - CESFAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #2a6db0;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .left-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .calendar {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .calendar table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .calendar th, .calendar td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .calendar th {
+            background-color: #2a6db0;
+            color: white;
+        }
+
+        .announcement-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .announcement-box:hover {
+            transform: scale(1.02);
+        }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .user-info {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .user-info img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-info .day-section {
+            margin-top: 10px;
+        }
+
+        .user-info .day-section button {
+            margin-top: 5px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2a6db0;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .user-info .day-section button:hover {
+            background-color: #1e4d7a;
+        }
+
+        .report-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .report-box:hover {
+            transform: scale(1.02);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>CESFAM</h2>
+        <div>
+            Bienvenido, Usuario Ejemplo
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sección izquierda: calendario + anuncio -->
+        <div class="left-section">
+            <div class="calendar">
+                <h3>Calendario del mes</h3>
+                <p>[Aquí se muestra un calendario estático]</p>
+                <table>
+                    <tr>
+                        <th>Lun</th>
+                        <th>Mar</th>
+                        <th>Mié</th>
+                        <th>Jue</th>
+                        <th>Vie</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
+                    </tr>
+                    <tr>
+                        <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
+                    </tr>
+                    <tr>
+                        <td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td>
+                    </tr>
+                    <tr>
+                        <td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td>
+                    </tr>
+                    <tr>
+                        <td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td>
+                    </tr>
+                    <tr>
+                        <td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td>
+                    </tr>
+                </table>
+            </div>
+
+            <a href="#">
+                <div class="announcement-box">
+                    <h4>Anuncio más reciente</h4>
+                    <p>Aquí se mostrará el anuncio más actual.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Sección derecha: usuario + avisos -->
+        <div class="right-section">
+            <div class="user-info">
+                <img src="https://via.placeholder.com/120" alt="Foto del usuario">
+                <h3>Nombre Apellido</h3>
+
+                <div class="day-section">
+                    <p>Días libres disponibles: 5</p>
+                    <button>Pedir día libre</button>
+                </div>
+
+                <div class="day-section">
+                    <p>Días administrativos: 2</p>
+                    <button>Pedir día administrativo</button>
+                </div>
+            </div>
+
+            <a href="#">
+                <div class="report-box">
+                    <h4>Reportar un aviso</h4>
+                    <p>Haz clic aquí para informar problemas de infraestructura o limpieza.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

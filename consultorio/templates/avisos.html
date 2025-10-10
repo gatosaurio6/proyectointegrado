@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisos - CESFAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #2a6db0;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .chat-section {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #e6f0ff;
+            max-width: 70%;
+        }
+
+        .message.user1 {
+            background-color: #cce5ff;
+            align-self: flex-start;
+        }
+
+        .message.user2 {
+            background-color: #99ccff;
+            align-self: flex-start;
+        }
+
+        .message.admin {
+            background-color: #ffd699;
+            align-self: flex-start;
+        }
+
+        .chat-input {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .chat-input button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2a6db0;
+            color: white;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background-color: #1e4d7a;
+        }
+
+        .users-section {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .users-section h3 {
+            margin-top: 0;
+        }
+
+        .user-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Avisos - CESFAM</h2>
+        <div>
+            <a href="inicio.html" style="color:white;">Volver al inicio</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Chat de avisos -->
+        <div class="chat-section">
+            <div class="chat-messages">
+                <div class="message user1">
+                    <strong>Funcionario1:</strong> Hay goteras en el pasillo del segundo piso.
+                </div>
+                <div class="message user2">
+                    <strong>Funcionario2:</strong> Se cortó la luz en la sala de espera.
+                </div>
+                <div class="message admin">
+                    <strong>Administración:</strong> El mantenimiento pasará mañana a revisar.
+                </div>
+                <div class="message user1">
+                    <strong>Funcionario1:</strong> Gracias por la información.
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Escribe un aviso...">
+                <button>Enviar</button>
+            </div>
+        </div>
+
+        <!-- Usuarios conectados -->
+        <div class="users-section">
+            <h3>Usuarios conectados</h3>
+            <div class="user-item">Funcionario1</div>
+            <div class="user-item">Funcionario2</div>
+            <div class="user-item">Administración</div>
+            <div class="user-item">Usuario Ejemplo</div>
+        </div>
+    </div>
+</body>
+</html>
