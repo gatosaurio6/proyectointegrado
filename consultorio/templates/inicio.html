@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Inicio - CESFAM</title>
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             background-color: #f2f2f2;
         }
-
         header {
             background-color: #2a6db0;
             color: white;
@@ -19,20 +22,17 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .main-container {
             display: flex;
             gap: 20px;
             padding: 20px;
         }
-
         .left-section {
             flex: 2;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
         .calendar {
             background-color: white;
             border-radius: 8px;
@@ -40,23 +40,19 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             overflow-x: auto;
         }
-
         .calendar table {
             border-collapse: collapse;
             width: 100%;
         }
-
         .calendar th, .calendar td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
-
         .calendar th {
             background-color: #2a6db0;
             color: white;
         }
-
         .announcement-box {
             background-color: white;
             border-radius: 8px;
@@ -64,18 +60,15 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.2s ease;
         }
-
         .announcement-box:hover {
             transform: scale(1.02);
         }
-
         .right-section {
             flex: 1;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
         .user-info {
             background-color: white;
             border-radius: 8px;
@@ -83,18 +76,15 @@
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         .user-info img {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
         }
-
         .user-info .day-section {
             margin-top: 10px;
         }
-
         .user-info .day-section button {
             margin-top: 5px;
             padding: 8px 12px;
@@ -105,11 +95,9 @@
             cursor: pointer;
             transition: background-color 0.2s ease;
         }
-
         .user-info .day-section button:hover {
             background-color: #1e4d7a;
         }
-
         .report-box {
             background-color: white;
             border-radius: 8px;
@@ -117,11 +105,9 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.2s ease;
         }
-
         .report-box:hover {
             transform: scale(1.02);
         }
-
         a {
             text-decoration: none;
             color: inherit;
@@ -132,45 +118,23 @@
     <header>
         <h2>CESFAM</h2>
         <div>
-            Bienvenido, Usuario Ejemplo
+            Bienvenido, {{ user.first_name|default:user.username }}
+            
+            {% if user.is_staff %}
+                <a href="/admin/" style="background-color: #f0ad4e; color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px; margin-left: 15px;">
+                    Administrar
+                </a>
+            {% endif %}
         </div>
     </header>
 
     <div class="main-container">
-        <!-- Sección izquierda: calendario + anuncio -->
         <div class="left-section">
             <div class="calendar">
                 <h3>Calendario del mes</h3>
-                <p>[Aquí se muestra un calendario estático]</p>
-                <table>
-                    <tr>
-                        <th>Lun</th>
-                        <th>Mar</th>
-                        <th>Mié</th>
-                        <th>Jue</th>
-                        <th>Vie</th>
-                        <th>Sáb</th>
-                        <th>Dom</th>
-                    </tr>
-                    <tr>
-                        <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
-                    </tr>
-                    <tr>
-                        <td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td>
-                    </tr>
-                    <tr>
-                        <td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td>
-                    </tr>
-                    <tr>
-                        <td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td>
-                    </tr>
-                    <tr>
-                        <td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td>
-                    </tr>
-                </table>
+                <div id='calendar'></div>
             </div>
-
-            <a href="#">
+            <a href="{% url 'anuncios' %}">
                 <div class="announcement-box">
                     <h4>Anuncio más reciente</h4>
                     <p>Aquí se mostrará el anuncio más actual.</p>
@@ -178,30 +142,92 @@
             </a>
         </div>
 
-        <!-- Sección derecha: usuario + avisos -->
         <div class="right-section">
             <div class="user-info">
                 <img src="https://via.placeholder.com/120" alt="Foto del usuario">
-                <h3>Nombre Apellido</h3>
-
+                <h3>{{ user.get_full_name|default:user.username }}</h3>
                 <div class="day-section">
-                    <p>Días libres disponibles: 5</p>
-                    <button>Pedir día libre</button>
+                    <p>Feriado disponibles: 5</p>
+                    <button>Solicitar feriados libre</button>
                 </div>
-
                 <div class="day-section">
                     <p>Días administrativos: 2</p>
-                    <button>Pedir día administrativo</button>
+                    <button>Solicitar día administrativo</button>
                 </div>
             </div>
-
-            <a href="#">
-                <div class="report-box">
+            <a href="{% url 'avisos' %}">
+                <div class="report-box" >
                     <h4>Reportar un aviso</h4>
                     <p>Haz clic aquí para informar problemas de infraestructura o limpieza.</p>
+                    
                 </div>
             </a>
         </div>
     </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendarConfig; 
+
+    {% if user.is_staff %}
+        // Este apartado es para administradores
+        calendarConfig = {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: '/api/eventos/',
+            editable: true,
+            selectable: true,
+            select: function(info) {
+                var title = prompt('Introduce el título del evento:');
+                if (title) {
+                    fetch('/api/eventos/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ title: title, start: info.startStr, end: info.endStr })
+                    }).then(() => { calendar.refetchEvents(); });
+                }
+                calendar.unselect();
+            },
+            eventChange: function(info) {
+                fetch(`/api/eventos/${info.event.id}/`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title: info.event.title, start: info.event.startStr, end: info.event.endStr })
+                });
+            },
+            eventClick: function(info) {
+                if (confirm("¿Estás seguro de que quieres eliminar este evento?")) {
+                    fetch(`/api/eventos/${info.event.id}/`, {
+                        method: 'DELETE'
+                    }).then(() => { info.event.remove(); });
+                }
+            }
+        };
+    {% else %}
+        // BLOQUE PARA USUARIOS NORMALES
+        calendarConfig = {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: '/api/eventos/',
+            editable: false,
+            selectable: false
+        };
+    {% endif %}
+
+    // Se crea el calendario con la configuración final
+    var calendar = new FullCalendar.Calendar(calendarEl, calendarConfig);
+    calendar.render();
+});
+</script>
+
 </body>
 </html>

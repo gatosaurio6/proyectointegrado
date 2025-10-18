@@ -128,7 +128,7 @@
     <header>
         <h2>Avisos - CESFAM</h2>
         <div>
-            <a href="inicio.html" style="color:white;">Volver al inicio</a>
+            <a href="{% url 'inicio' %}" style="color:white;">Volver al inicio</a>
         </div>
     </header>
 
@@ -157,7 +157,7 @@
 
         <!-- Usuarios conectados -->
         <div class="users-section">
-            <h3>Usuarios conectados</h3>
+            <h3 style="margin-top: 0;">Usuarios conectados ({{ usuarios_conectados.count }})</h3>
             <div class="user-item">Funcionario1</div>
             <div class="user-item">Funcionario2</div>
             <div class="user-item">Administración</div>
