@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitar Días Libres</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        form p { margin-bottom: 20px; }
+        form label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        form input, form textarea { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #2a6db0; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        a { color: #2a6db0; text-decoration: none; display: inline-block; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Solicitud de Días Libres</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar Solicitud</button>
+        </form>
+        <a href="{% url 'inicio' %}">Cancelar y Volver al Inicio</a>
+    </div>
+</body>
+</html>

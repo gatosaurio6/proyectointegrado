@@ -162,6 +162,28 @@
                     
                 </div>
             </a>
+            {% if user.is_authenticated and not user.is_staff %}
+            <a href="{% url 'crear_solicitud' %}">
+                <div class="report-box" style="background-color: #d9edf7;">
+                    <h4>Solicitar Días Libres</h4>
+                    <p>Haz clic aquí para enviar una nueva solicitud de días.</p>
+                </div>
+            </a>
+            {% endif %}
+            {% if user.groups.all.0.name == 'Jefatura' %}
+            <a href="{% url 'revisar_solicitudes' %}">
+                <div class="report-box" style="background-color: #fcf8e3;">
+                    <h4>Revisar Solicitudes</h4>
+                    <p>Aprobar o rechazar solicitudes de tu área.</p>
+                </div>
+            </a>
+            {% endif %}
+            <a href="{% url 'lista_documentos' %}">
+                <div class="report-box">
+                    <h4>Documentos</h4>
+                    <p>Acceder al repositorio de archivos (PDF, Word, PPT).</p>
+                </div>
+            </a>
         </div>
     </div>
 
