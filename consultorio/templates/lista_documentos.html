@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuncios - CESFAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #2a6db0;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .main-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .announcement-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .announcement-card:hover {
+            transform: scale(1.02);
+        }
+
+        .announcement-card img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .announcement-card h3 {
+            margin: 5px 0;
+            color: #2a6db0;
+        }
+
+        .announcement-card p {
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Documentos - CESFAM</h2>
+        <div>
+            <a href="{% url 'inicio' %}" style="color:white;">Volver al inicio</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Anuncio 1 -->
+            <div class="announcement-card">
+                <a href="{% static 'documentos/mensajesupersecreto.txt' %}" download> secretos de la vida </a>
+            </div>
+    </div>
+</body>
+</html>
