@@ -1,0 +1,43 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4>📤 Subir Documento Oficial</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label>Título del Documento</label>
+                            {{ form.titulo }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Descripción (Opcional)</label>
+                            {{ form.descripcion }}
+                        </div>
+
+                        <div class="form-group">
+                            <label>Seleccionar Archivo (PDF)</label>
+                            {{ form.archivo }}
+                            <small class="form-text text-muted">Solo archivos PDF permitidos.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Subir Documento</button>
+                        <a href="{% url 'lista_documentos' %}" class="btn btn-secondary btn-block">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    input[type="text"], textarea, select { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+</style>
+{% endblock %}

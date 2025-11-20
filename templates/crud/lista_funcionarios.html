@@ -1,0 +1,47 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+{% include 'crud/navbar_admin.html' %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Gestión de Personal</h2>
+        <a href="{% url 'crear_funcionario' %}" class="btn btn-success">+ Nuevo Funcionario</a>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre Completo</th>
+                        <th>Email</th>
+                        <th>Área</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for func in funcionarios %}
+                    <tr>
+                        <td>{{ func.username }}</td>
+                        <td>{{ func.first_name }} {{ func.last_name }}</td>
+                        <td>{{ func.email }}</td>
+                        <td>
+                            {% if func.perfil.area %}
+                                <span class="badge badge-info">{{ func.perfil.area.nombre }}</span>
+                            {% else %}
+                                <span class="badge badge-secondary">Sin Área</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'editar_funcionario' func.id %}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="{% url 'eliminar_funcionario' func.id %}" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que quieres eliminar a este usuario?');">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

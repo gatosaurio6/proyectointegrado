@@ -1,0 +1,32 @@
+{% extends 'inicio.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">📢 Tablón de Anuncios</h1>
+    
+    <div class="row">
+        {% for noticia in noticias %}
+        <div class="col-md-8 offset-md-2 mb-4">
+            <div class="card shadow {% if noticia.importante %}border-danger{% endif %}">
+                <div class="card-header {% if noticia.importante %}bg-danger text-white{% else %}bg-light{% endif %}">
+                    <h5 class="mb-0">{{ noticia.titulo }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" style="white-space: pre-line;">{{ noticia.contenido }}</p>
+                    <p class="text-muted small text-right mb-0">Publicado el: {{ noticia.fecha_publicacion }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-8 offset-md-2">
+            <div class="alert alert-info text-center">
+                No hay anuncios nuevos por el momento.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver al Inicio</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - CESFAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    <style>
+        /* Estilo extra para destacar los botones de jefatura/dirección */
+        .admin-panel-box {
+            background-color: #e8f4f8;
+            border: 2px solid #17a2b8;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .jefatura-panel-box {
+            background-color: #e8f8e8;
+            border: 2px solid #28a745;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>CESFAM</h2>
+        <div class="header-user-info">
+            <img src="https://via.placeholder.com/40" alt="Foto" class="rounded-circle">
+            <span class="ml-2">Hola, {{ user.first_name|default:user.username }}</span>
+            <a href="{% url 'login' %}" class="text-white ml-3 small">(Salir)</a>
+        </div>
+    </header>
+    {% block content %}
+    <div class="main-container">
+        <div class="left-section">
+            <div class="calendar">
+                <h3>Calendario del mes</h3>
+                <div id='calendar'></div>
+            </div>
+            <a href="{% url 'anuncios' %}">
+                <div class="announcement-box">
+                    <h4>📢 Anuncios</h4>
+                    <p>Ver últimas noticias institucionales.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="right-section">
+            
+            <div class="user-info">
+                <img src="https://via.placeholder.com/100" alt="Perfil" class="user-info-profile-pic">
+                <h3>{{ user.get_full_name|default:user.username }}</h3>
+                <p class="text-muted">{{ user.perfil.area.nombre|default:"Sin Área Asignada" }}</p>
+                
+                <div class="day-section mt-3">
+                    <h5>Días Disponibles: <strong>{{ dias_disponibles }}</strong></h5>
+                </div>
+            </div>
+
+            {% if user.groups.all.0.name == 'Direccion' or user.groups.all.0.name == 'Subdireccion Administrativa' or user.groups.all.0.name == 'Subdireccion Clinica' %}
+            <div class="admin-panel-box">
+                <h5 class="text-info">🛠 Panel de Dirección</h5>
+                <p class="small">Acceso total al sistema.</p>
+                
+                <a href="{% url 'lista_funcionarios' %}" class="btn btn-info btn-block mb-2">
+                    👥 Gestion
+                </a>
+            </div>
+            {% endif %}
+
+            {% if user.groups.all.0.name == 'Jefatura' %}
+            <div class="jefatura-panel-box">
+                <h5 class="text-success">📋 Panel de Jefatura</h5>
+                <p class="small">Gestión de tu área: <strong>{{ user.perfil.area.nombre }}</strong></p>
+                
+                <a href="{% url 'revisar_solicitudes' %}" class="btn btn-success btn-block mb-2">
+                    ✅ Aprobar Días Libres (Mi Área)
+                </a>
+                <a href="{% url 'revisar_solicitudes_vacaciones' %}" class="btn btn-outline-success btn-block btn-sm">
+                    ✈️ Aprobar Vacaciones
+                </a>
+            </div>
+            {% endif %}
+
+            {% if not user.is_superuser %}
+            <a href="{% url 'crear_solicitud' %}">
+                <div class="report-box">
+                    <h4>📝 Solicitar Día Libre</h4>
+                    <p>Pide un día administrativo o feriado legal.</p>
+                </div>
+            </a>
+            {% endif %}
+
+            <a href="{% url 'avisos' %}">
+                <div class="report-box">
+                    <h4>⚠️ Reportar Problema</h4>
+                    <p>Infraestructura, limpieza, etc.</p>
+                </div>
+            </a>
+
+            <a href="{% url 'lista_documentos' %}">
+                <div class="report-box">
+                    <h4>📂 Documentos</h4>
+                    <p>Reglamentos y archivos.</p>
+                </div>
+            </a>
+
+        </div> 
+    </div> 
+    {% endblock %}
+    <footer class="text-center mt-5 mb-3">
+        <hr style="width: 80%; opacity: 0.3;">
+        <p class="text-muted small">
+            Intranet CESFAM Santa Rosa <br>
+            <span class="badge badge-secondary">Versión 0.8 (Beta)</span> 
+            <span class="ml-2">© 2025 Desarrollo Interno</span>
+        </p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'dayGridMonth'
+            },
+            events: '/api/eventos/', // Conectado a tu API de eventos
+            locale: 'es'
+        });
+        calendar.render();
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+/* static/css/admin.css */
+
+/* General Body and Structure */
+body {
+    background: linear-gradient(#0B3037, #134e5e);
+    color: #fff;
+}
+
+#header {
+    background-color: #134e5e;
+    color: #fff;
+}
+
+#branding h1 {
+    color: #fff;
+}
+
+/* Modules and Sections */
+.module h2, .module caption, .inline-group h2 {
+    background-color: rgba(19, 78, 94, 0.7);
+    color: #fff;
+}
+
+.module {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Links */
+a, a:link, a:visited {
+    color: #f68e44;
+}
+
+/* Buttons and Inputs */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background-color: #2a6db0;
+    color: #fff;
+}
+
+.object-tools a.addlink {
+    background-color: #f68e44;
+    color: #fff;
+}
+
+.object-tools {
+    margin-top: 20px;
+}
+
+/* Cards */
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    margin: 0;
+}
+
+/* Custom Buttons */
+.btn-primary {
+    background-color: #f68e44;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #e07b39;
+}
+
+/* Changelist */
+#changelist-filter {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#changelist-filter h2, #changelist-filter h3 {
+    color: #fff;
+}
+
+.change-list .filtered .results, .change-list .filtered .paginator {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Tables */
+table {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+thead th {
+    background-color: rgba(19, 78, 94, 0.7);
+}
+
+/* Paginator */
+.paginator {
+    color: #fff;
+}
+
+.paginator a {
+    color: #f68e44;
+}
+
+/* Actions and Search */
+.actions {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.actions select {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+#changelist-search {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#changelist-search input[type="text"] {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.object-tools a {
+    background-color: #2a6db0;
+    color: #fff;
+}

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CESFAM</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="login-box">
+        <h2>Login CESFAM</h2>
+
+        {% if form.errors %}
+            <p class="error">Usuario o contraseña incorrectos</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="user-box">
+                <input type="text" name="username" id="id_username" placeholder="Tu usuario">
+                <label for="id_username">Usuario:</label>
+            </div>
+
+            <div class="user-box">
+                <input type="password" name="password" id="id_password" placeholder="Tu contraseña">
+                <label for="id_password">Contraseña:</label>
+            </div>
+
+            <button type="submit" class="animated-button">
+                <span class="arr-1"></span>
+                <span class="text">Ingresar</span>
+                <span class="arr-2"></span>
+            </button>
+        </form>
+        <p class="forgot-password-link"><a href="#">¿Olvidaste tu contraseña?</a></p>
+        
+    </div>
+</body>
+</html>

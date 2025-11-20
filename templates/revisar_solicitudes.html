@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Revisar Solicitudes</title>
+    <link rel="stylesheet" href="{% static 'css/solicitudes.css' %}">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Solicitudes Pendientes</h1>
+        <p>Estás revisando las solicitudes para el área: <strong>{{ area_del_jefe.nombre|default:"Ninguna área asignada" }}</strong></p>
+        <hr>
+
+        {% for sol in solicitudes %}
+            <div class="solicitud">
+                <h3>Solicitante: {{ sol.solicitante.get_full_name|default:sol.solicitante.username }}</h3>
+                <p><strong>Desde:</strong> {{ sol.fecha_inicio }} | <strong>Hasta:</strong> {{ sol.fecha_fin }}</p>
+                <p><strong>Motivo:</strong> {{ sol.motivo }}</p>
+                <div class="acciones">
+                    <a href="{% url 'gestionar_solicitud' sol.id 'aprobar' %}" class="aprobar">Aprobar</a>
+                    <a href="{% url 'gestionar_solicitud' sol.id 'rechazar' %}" class="rechazar">Rechazar</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay solicitudes pendientes en tu área.</p>
+        {% endfor %}
+        
+        <a href="{% url 'inicio' %}" class="volver">Volver al Inicio</a>
+    </div>
+</body>
+</html>

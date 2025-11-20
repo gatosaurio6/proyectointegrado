@@ -1,0 +1,109 @@
+/* static/css/solicitudes.css */
+
+body {
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background: linear-gradient(#0B3037, #134e5e);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.solicitud {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.acciones a {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.aprobar {
+    background-color: #2a6db0;
+}
+
+.rechazar {
+    background-color: #f68e44;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #2a6db0;
+    margin: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #1e4d7a;
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 20px;
+    color: #f68e44;
+    text-decoration: none;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+form button {
+    background-color: #f68e44;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+form button:hover {
+    background-color: #e07b39;
+}

@@ -1,0 +1,80 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+{% include 'crud/navbar_admin.html' %}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📊 Dashboard General</h2>
+        <span class="text-muted">Resumen en tiempo real</span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-primary shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">TOTAL USUARIOS</h6>
+                            <h2 class="display-4 font-weight-bold mb-0">{{ total_usuarios }}</h2>
+                        </div>
+                        <div style="font-size: 3rem; opacity: 0.5;">👥</div>
+                    </div>
+                    <small>Funcionarios registrados en el sistema</small>
+                </div>
+                <div class="card-footer bg-primary border-0">
+                    <a href="{% url 'lista_funcionarios' %}" class="text-white stretched-link" style="text-decoration: underline;">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-success shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">JEFATURAS ACTIVAS</h6>
+                            <h2 class="display-4 font-weight-bold mb-0">{{ total_jefes }}</h2>
+                        </div>
+                        <div style="font-size: 3rem; opacity: 0.5;">👔</div>
+                    </div>
+                    <small>Líderes de área asignados</small>
+                </div>
+                <div class="card-footer bg-success border-0">
+                    <a href="{% url 'lista_funcionarios' %}" class="text-white stretched-link" style="text-decoration: underline;">Gestionar Roles</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-info shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">USUARIOS ONLINE</h6>
+                            <h2 class="display-4 font-weight-bold mb-0">{{ cantidad_online }}</h2>
+                        </div>
+                        <div style="font-size: 3rem; opacity: 0.5;">🟢</div>
+                    </div>
+                    <small>Conectados en este momento</small>
+                </div>
+                <div class="card-footer bg-info border-0">
+                    <a href="{% url 'avisos' %}" class="text-white stretched-link" style="text-decoration: underline;">Ver quiénes son</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <div class="card bg-light border-warning shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="text-warning font-weight-bold">⚠️ Atención Requerida</h5>
+                        <p class="mb-0">Hay <strong>{{ solicitudes_pendientes }}</strong> solicitudes de días libres esperando aprobación en todo el consultorio.</p>
+                    </div>
+                    <a href="{% url 'revisar_solicitudes' %}" class="btn btn-warning">Revisar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
