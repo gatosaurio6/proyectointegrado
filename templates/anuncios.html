@@ -1,0 +1,26 @@
+{% extends 'inicio.html' %}
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mb-4 text-center">📢 Tablón de Anuncios</h1>
+    
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            {% for noticia in noticias %}
+            <div class="anuncio-card {% if noticia.importante %}importante{% endif %}">
+                <h5>{{ noticia.titulo }}</h5>
+                <p class="card-text">{{ noticia.contenido }}</p>
+                <p class="text-muted small text-right mb-0">Publicado el: {{ noticia.fecha_publicacion }}</p>
+            </div>
+            {% empty %}
+            <div class="alert alert-info text-center">
+                No hay anuncios nuevos por el momento.
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver al Inicio</a>
+    </div>
+</div>
+{% endblock %}

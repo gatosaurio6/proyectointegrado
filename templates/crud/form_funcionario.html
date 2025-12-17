@@ -1,0 +1,101 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+{% include 'crud/navbar_admin.html' %}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{{ titulo }}</h4>
+                </div>
+                
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <h5 class="text-primary mb-3">👤 Datos Personales y Cuenta</h5>
+                        
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold">Nombre de Usuario</label>
+                                {{ u_form.username }}
+                                {% if u_form.username.errors %}
+                                    <div class="text-danger small">{{ u_form.username.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold">Correo Electrónico</label>
+                                {{ u_form.email }}
+                                {% if u_form.email.errors %}
+                                    <div class="text-danger small">{{ u_form.email.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold">Nombres</label>
+                                {{ u_form.first_name }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold">Apellidos</label>
+                                {{ u_form.last_name }}
+                            </div>
+                        </div>
+
+                        {% if u_form.password %}
+                        <div class="form-group bg-light p-3 border rounded">
+                            <label class="font-weight-bold text-danger">🔐 Contraseña Inicial</label>
+                            {{ u_form.password }}
+                            <small class="form-text text-muted">
+                                Asigna una contraseña provisoria. El funcionario podrá cambiarla después.
+                            </small>
+                            {% if u_form.password.errors %}
+                                <div class="text-danger small">{{ u_form.password.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <hr class="my-4">
+
+                        <h5 class="text-info mb-3">🏥 Datos Institucionales</h5>
+                        
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold">RUT</label>
+                                {{ p_form.rut }}
+                                <small class="form-text text-muted">Formato: 12345678-9 (Sin puntos)</small>
+                                {% if p_form.rut.errors %}
+                                    <div class="text-danger small">{{ p_form.rut.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label class="font-weight-bold">Área de Trabajo</label>
+                                {{ p_form.area }}
+                                <small class="form-text text-muted">Selecciona a qué departamento pertenece.</small>
+                                {% if p_form.area.errors %}
+                                    <div class="text-danger small">{{ p_form.area.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+
+                        <div class="mt-4 d-flex justify-content-between align-items-center">
+                            <a href="{% url 'lista_funcionarios' %}" class="btn btn-secondary px-4">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-success px-5 btn-lg">
+                                Guardar Funcionario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

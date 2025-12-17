@@ -1,0 +1,45 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h3 class="text-center mb-4">Gestionar Solicitudes</h3>
+                    
+                    <ul class="nav nav-tabs card-header-tabs justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" href="{% url 'crear_solicitud' %}">
+                                📅 Día Administrativo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active font-weight-bold" href="#">
+                                🏖️ Vacaciones
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <strong>Solicitando: Feriado Legal (Vacaciones)</strong>
+                    </div>
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {{ form.as_p }}
+                        
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success btn-block">Enviar Solicitud</button>
+                            <a href="{% url 'inicio' %}" class="btn btn-secondary btn-block">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

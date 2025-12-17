@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - CESFAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+    
+</head>
+<body>
+    <header>
+        <h2 class="logo-title">
+            CESFAM
+            <img src="{% static 'imagenes/sin fondo.png' %}" alt="Logo" class="logo-navbar-small">
+        </h2>
+        <div class="header-user-info">
+            <span class="ml-2">Hola, {{ user.get_full_name|default:user.username }}</span>
+            <a href="{% url 'login' %}" class="text-white ml-3 small">(Salir)</a>
+        </div>
+    </header>
+    {% block content %}
+    <div class="main-container">
+        <div class="user-info">
+            <div class="user-header-details">
+                <div>
+                    <h3>{{ user.get_full_name|default:user.username }}</h3>
+                    <small class="text-muted">{{ user.perfil.area.nombre|default:"Sin Área Asignada" }}</small>
+                </div>
+            </div>
+
+            <div class="day-section mt-3 text-left pl-4">
+                <h5 class="mb-3">Días Administrativos Usados ({{ anio_actual }}): 
+                    <strong class="text-primary">{{ dias_usados }}</strong></h5>
+                <h5>Vacaciones: 
+                    {% if estado_vacaciones == 'Esperando' %}
+                    <span class="badge badge-warning text-white">Esperando</span>
+                    {% elif estado_vacaciones == 'Aprobado' %}
+                    <span class="badge badge-success">Aprobado</span>
+                    {% elif estado_vacaciones == 'Rechazado' %}
+                    <span class="badge badge-danger">Rechazado</span>
+                    {% else %}
+                    <span class="badge badge-secondary">--</span>
+                    {% endif %}
+                </h5>
+            </div>
+        </div>
+        <div class="left-section">
+            <div class="calendar">
+                <h3>Calendario del mes</h3>
+                <div id='calendar'></div>
+            </div>
+        </div>
+
+        <div class="right-section">
+
+            {% if user.groups.all.0.name == 'Direccion' or user.groups.all.0.name == 'Subdireccion Administrativa' or user.groups.all.0.name == 'Subdireccion Clinica' %}
+            <div class="grouped-admin-section">
+                <h4>🛠 Panel de Dirección</h4>
+                <div class="admin-panel-box">
+                    <p class="small">Acceso total al sistema.</p>
+                    
+                    <a href="{% url 'lista_funcionarios' %}" class="btn btn-info btn-block mb-2">
+                        👥 Gestion
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if user.groups.all.0.name == 'Jefatura' %}
+            <div class="jefatura-panel-box">
+                <h5 class="text-success">📋 Panel de Jefatura</h5>
+                <p class="small">Gestión de tu área: <strong>{{ user.perfil.area.nombre }}</strong></p>
+                
+                <a href="{% url 'revisar_solicitudes' %}" class="btn btn-success btn-block mb-2">
+                    ✅ Aprobar Días Libres (Mi Área)
+                </a>
+                <a href="{% url 'revisar_solicitudes_vacaciones' %}" class="btn btn-outline-success btn-block btn-sm">
+                    ✈️ Aprobar Vacaciones
+                </a>
+            </div>
+            {% endif %}
+
+            <div class="grouped-info-section">
+                <h4>Información y Utilidades</h4>
+                <div class="info-boxes-container">
+                    <a href="{% url 'anuncios' %}">
+                        <div class="announcement-box">
+                            <h4>📢 Anuncios</h4>
+                            <p>Ver últimas noticias institucionales.</p>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'avisos' %}">
+                        <div class="report-box">
+                            <h4>⚠️ Reportar Problema</h4>
+                            <p>Infraestructura, limpieza, etc.</p>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'lista_documentos' %}">
+                        <div class="report-box">
+                            <h4>📂 Documentos</h4>
+                            <p>Reglamentos y archivos.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            {% if not user.is_superuser %}
+            <a href="{% url 'crear_solicitud' %}">
+                <div class="report-box">
+                    <h4>📝 Solicitar Día Libre</h4>
+                    <p>Pide un día administrativo o feriado legal.</p>
+                </div>
+            </a>
+            {% endif %}
+
+        </div> 
+    </div> 
+    {% endblock %}
+    <footer class="text-center mt-5 mb-3">
+        <hr style="width: 80%; opacity: 0.3;">
+        <p class="text-muted small">
+            Intranet CESFAM Santa Rosa <br>
+            <span class="badge badge-secondary">Versión 0.8 (Beta)</span> 
+            <span class="ml-2">© 2025 Desarrollo Interno</span>
+        </p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay' 
+            },
+            events: '/api/eventos/',
+            locale: 'es',
+            buttonText: {
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día'
+            }
+        });
+        calendar.render();
+    });
+    </script>
+</body>
+</html>

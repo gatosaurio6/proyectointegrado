@@ -1,0 +1,100 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+.card {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.card-header {
+    background-color: rgba(19, 78, 94, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    padding: 15px;
+    color: white;
+}
+.card-body p {
+    color: white;
+}
+</style>
+<div id="content-main">
+    <h1>Panel de Administración</h1>
+    <div class="main-container">
+        <div class="left-section">
+            <div class="card">
+                <div class="card-header">Estadísticas de Solicitudes</div>
+                <div class="card-body">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="card">
+                <div class="card-header">Solicitudes de Días Libres</div>
+                <div class="card-body">
+                    <p>Total de solicitudes: {{ total_solicitudes_dia_libre }}</p>
+                    <a href="{% url 'admin:informacion_solicituddialibre_changelist' %}" class="btn btn-primary">Gestionar</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Solicitudes de Vacaciones</div>
+                <div class="card-body">
+                    <p>Total de solicitudes: {{ total_solicitudes_vacaciones }}</p>
+                    <a href="{% url 'admin:informacion_solicitudvacaciones_changelist' %}" class="btn btn-primary">Gestionar</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Licencias Médicas</div>
+                <div class="card-body">
+                    <p>Total de licencias: {{ total_licencias_medicas }}</p>
+                    <a href="{% url 'admin:informacion_licenciamedica_changelist' %}" class="btn btn-primary">Gestionar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Días Libres', 'Vacaciones', 'Licencias Médicas'],
+            datasets: [{
+                label: 'Número de Solicitudes',
+                data: [{{ total_solicitudes_dia_libre }}, {{ total_solicitudes_vacaciones }}, {{ total_licencias_medicas }}],
+                backgroundColor: [
+                    'rgba(246, 142, 68, 0.7)',
+                    'rgba(42, 109, 176, 0.7)',
+                    'rgba(255, 206, 86, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(246, 142, 68, 1)',
+                    'rgba(42, 109, 176, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,169 @@
+:root {
+    --primary-bg: #0B3037;
+    --secondary-bg: #134e5e;
+    --accent-blue: #00bcd4; /* A vibrant, electrifying blue */
+    --accent-orange: #ff9800; /* A vibrant orange for contrast/alerts */
+    --text-color: #e0f2f7; /* Light text for dark backgrounds */
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.15);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+    --shadow-medium: rgba(0, 0, 0, 0.4);
+    --shadow-strong: rgba(0, 0, 0, 0.6);
+}
+
+/* static/css/solicitudes.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto; /* Increased margin for better spacing */
+    padding: 30px; /* Increased padding */
+    background-color: var(--card-bg); /* Use card background variable */
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 8px 30px var(--shadow-medium); /* Enhanced shadow */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    border: 1px solid var(--card-border); /* Subtle border */
+}
+
+h1 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 25px; /* Increased margin */
+    text-shadow: 0 0 10px var(--shadow-light); /* Subtle glow effect */
+    letter-spacing: 1px; /* Slightly spaced letters */
+}
+
+.solicitud {
+    background-color: var(--card-bg); /* Use card background variable */
+    border: 1px solid var(--card-border); /* Use card border variable */
+    padding: 20px; /* Increased padding */
+    margin-bottom: 20px; /* Increased margin */
+    border-radius: 8px; /* Slightly more rounded corners */
+    box-shadow: 0 4px 15px var(--shadow-light); /* Enhanced subtle shadow */
+}
+
+.acciones a {
+    display: inline-block;
+    padding: 10px 18px; /* Slightly more padding */
+    border-radius: 6px; /* Slightly more rounded */
+    text-decoration: none;
+    color: var(--text-color);
+    margin-right: 12px; /* Adjusted margin */
+    transition: all 0.3s ease; /* Smooth transition for all changes */
+    font-weight: bold;
+}
+
+.aprobar {
+    background-color: var(--accent-blue);
+}
+
+.aprobar:hover {
+    background-color: #008c9e; /* Darker shade for hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+}
+
+.rechazar {
+    background-color: var(--accent-orange);
+}
+
+.rechazar:hover {
+    background-color: #e68900; /* Darker shade for hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px; /* Increased padding */
+    font-size: 1.1rem; /* Slightly larger font */
+    border-radius: 8px; /* More rounded */
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--accent-blue);
+    margin: 15px 10px; /* Adjusted margin */
+    transition: all 0.3s ease; /* Smooth transition */
+    border: none; /* Remove default border */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3); /* Initial shadow */
+}
+
+.btn:hover {
+    background-color: #00bcd4; /* Accent blue */
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.5); /* Enhanced shadow on hover */
+}
+
+.volver {
+    display: inline-block;
+    margin-top: 25px; /* Adjusted margin */
+    color: var(--accent-orange);
+    text-decoration: none;
+    font-weight: bold; /* Bolder text */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.volver:hover {
+    color: #e68900; /* Darker orange on hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    border-radius: 6px; /* Slightly more rounded */
+    border: 1px solid var(--card-border);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form textarea:focus {
+    outline: none; /* Remove default outline */
+    border-color: var(--accent-blue); /* Accent border on focus */
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.5); /* Glowing effect */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter background on focus */
+}
+
+form button {
+    background-color: var(--accent-orange);
+    color: var(--text-color);
+    border: none;
+    padding: 12px 20px; /* Adjusted padding */
+    border-radius: 6px; /* More rounded */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem; /* Consistent font size */
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+form button:hover {
+    background-color: #e68900; /* Darker orange on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+}

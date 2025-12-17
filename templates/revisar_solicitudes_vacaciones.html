@@ -1,0 +1,81 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">🏖️ Revisar Solicitudes: Vacaciones</h4>
+            <span class="badge badge-light text-dark">{{ area_del_jefe.nombre|default:"Tu Área" }}</span>
+        </div>
+        
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Hora de envio</th>
+                            <th>Solicitante</th>
+                            <th>Desde</th>
+                            <th>Hasta</th>
+                            <th style="width: 30%;">Motivo</th>
+                            <th>Documento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sol in solicitudes %}
+                        <tr>
+                            <td class="align-middle text-muted small">
+                                {{ sol.fecha_solicitud|date:"d/m/Y H:i" }}
+                            </td>
+                            <td class="align-middle font-weight-bold">
+                                {{ sol.solicitante.get_full_name|default:sol.solicitante.username }}
+                            </td>
+                            <td class="align-middle">{{ sol.fecha_inicio|date:"d/m/Y" }}</td>
+                            <td class="align-middle">{{ sol.fecha_fin|date:"d/m/Y" }}</td>
+                            <td class="align-middle">
+                                <small class="text-muted d-block" style="line-height: 1.2;">
+                                    {{ sol.motivo }}
+                                </small>
+                            </td>
+                            <td class="align-middle">
+                                {% if sol.archivo_adjunto %}
+                                    <a href="{{ sol.archivo_adjunto.url }}" target="_blank" class="btn btn-sm btn-light border text-nowrap">
+                                        📄 Ver Adjunto
+                                    </a>
+                                {% else %}
+                                    <span class="badge badge-secondary">Sin archivo</span>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'gestionar_solicitud_vacaciones' sol.id 'aprobar' %}" 
+                                       class="btn btn-success btn-sm"
+                                       onclick="return confirm('¿Aprobar estas vacaciones?');">
+                                        ✔ Aprobar
+                                    </a>
+                                    <a href="{% url 'gestionar_solicitud_vacaciones' sol.id 'rechazar' %}" 
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('¿Rechazar estas vacaciones?');">
+                                        ✖ Rechazar
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <h5 class="text-muted">✅ No hay solicitudes de vacaciones pendientes.</h5>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="">
+            <a href="{% url 'inicio' %}" class="btn btn-secondary">⬅ Volver al Inicio</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

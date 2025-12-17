@@ -1,0 +1,65 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">⬆ Subir Nuevo Documento</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="{{ form.titulo.id_for_label }}">Título del Documento</label>
+                            <input type="text" name="titulo" class="form-control" id="{{ form.titulo.id_for_label }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.descripcion.id_for_label }}">Descripción (Opcional)</label>
+                            <textarea name="descripcion" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Seleccionar Archivo</label>
+                            <div class="custom-file">
+                                <input type="file" name="archivo" class="custom-file-input" id="customFile" required>
+                                <label class="custom-file-label" for="customFile">Elegir archivo...</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <div class="alert alert-secondary d-flex align-items-center">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="importante" class="custom-control-input" id="checkImportante">
+                                    <label class="custom-control-label font-weight-bold" for="checkImportante">
+                                        ¿Marcar como Importante?
+                                    </label>
+                                </div>
+                                <small class="ml-3 text-muted">
+                                    (Aparecerá primero en la lista y con borde rojo)
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success btn-block btn-lg">Subir Documento</button>
+                            <a href="{% url 'lista_documentos' %}" class="btn btn-secondary btn-block">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.custom-file-input').addEventListener('change', function(e){
+        var fileName = document.getElementById("customFile").files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+    })
+</script>
+{% endblock %}

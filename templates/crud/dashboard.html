@@ -1,0 +1,107 @@
+{% extends 'inicio.html' %}
+
+{% block content %}
+{% include 'crud/navbar_admin.html' %}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📊 Dashboard General</h2>
+        <span class="text-muted">Resumen en tiempo real</span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-primary shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">TOTAL USUARIOS</h6>
+                            <h2 class="display-4 font-weight-bold mb-0">{{ total_usuarios }}</h2>
+                        </div>
+                        <div style="font-size: 3rem; opacity: 0.5;">👥</div>
+                    </div>
+                    <small>Funcionarios registrados en el sistema</small>
+                </div>
+                <div class="card-footer bg-primary border-0">
+                    <a href="{% url 'lista_funcionarios' %}" class="text-white stretched-link" style="text-decoration: underline;">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-success shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">JEFATURAS ACTIVAS</h6>
+                            <h2 class="display-4 font-weight-bold mb-0">{{ total_jefes }}</h2>
+                        </div>
+                        <div style="font-size: 3rem; opacity: 0.5;">👔</div>
+                    </div>
+                    <small>Líderes de área asignados</small>
+                </div>
+                <div class="card-footer bg-success border-0">
+                    <a href="{% url 'lista_funcionarios' %}" class="text-white stretched-link" style="text-decoration: underline;">Gestionar Roles</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-info shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">USUARIOS ONLINE</h6>
+                            <h2 class="display-4 font-weight-bold mb-0">{{ cantidad_online }}</h2>
+                        </div>
+                        <div style="font-size: 3rem; opacity: 0.5;">🟢</div>
+                    </div>
+                    <small>Conectados en este momento</small>
+                </div>
+                <div class="card-footer bg-info border-0">
+                    <a href="{% url 'lista_usuarios_online' %}" class="text-white stretched-link" style="text-decoration: underline;">Ver quiénes son</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <div class="card shadow-sm border-warning">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="mb-0 font-weight-bold">⚠️ Solicitudes Pendientes</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        
+                        <div class="col-md-6 border-right">
+                            <h3 class="display-4">{{ pendientes_dias }}</h3>
+                            <p class="text-muted font-weight-bold">Días Administrativos</p>
+                            
+                            {% if pendientes_dias > 0 %}
+                                <a href="{% url 'revisar_solicitudes' %}" class="btn btn-outline-dark btn-sm">
+                                    Revisar Días Libres
+                                </a>
+                            {% else %}
+                                <span class="text-success">✅ Todo al día</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h3 class="display-4">{{ pendientes_vacaciones }}</h3>
+                            <p class="text-muted font-weight-bold">Vacaciones</p>
+                            
+                            {% if pendientes_vacaciones > 0 %}
+                                <a href="{% url 'revisar_solicitudes_vacaciones' %}" class="btn btn-outline-dark btn-sm">
+                                    Revisar Vacaciones
+                                </a>
+                            {% else %}
+                                <span class="text-success">✅ Todo al día</span>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

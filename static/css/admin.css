@@ -1,0 +1,299 @@
+:root {
+    --primary-bg: #0B3037;
+    --secondary-bg: #134e5e;
+    --accent-blue: #00bcd4; /* Vibrant blue from solicitudes.css */
+    --accent-orange: #ff9800; /* Vibrant orange from solicitudes.css */
+    --text-color: #e0f2f7; /* Light text for dark backgrounds from solicitudes.css */
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.15);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+    --shadow-medium: rgba(0, 0, 0, 0.4);
+    --shadow-strong: rgba(0, 0, 0, 0.6);
+
+    /* Existing admin specific variables, adjusted */
+    --admin-header-bg: var(--secondary-bg); /* Use secondary background */
+    --module-header-bg: var(--secondary-bg); /* Use secondary background */
+    --admin-accent-color: var(--accent-blue); /* Use the new accent blue */
+    --admin-accent-hover-color: #008c9e; /* Darker shade of accent blue */
+    --admin-shadow-color: rgba(0, 0, 0, 0.2); /* Adjusted for consistency */
+}
+
+/* static/css/admin.css */
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    color: var(--text-color);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+#header {
+    background-color: var(--admin-header-bg);
+    color: var(--text-color);
+    box-shadow: 0 2px 5px var(--shadow-medium); /* Add subtle shadow */
+}
+
+#branding h1 {
+    color: var(--text-color);
+    text-shadow: 0 0 8px var(--shadow-light); /* Subtle glow effect */
+}
+
+/* Modules and Sections */
+.module h2, .module caption, .inline-group h2 {
+    background-color: var(--module-header-bg);
+    color: var(--text-color);
+    padding: 12px 15px; /* Adjusted padding */
+    border-bottom: 1px solid var(--card-border); /* Subtle border */
+    border-radius: 5px 5px 0 0; /* Rounded top corners */
+}
+
+.module {
+    background: var(--card-bg);
+    border-radius: 8px; /* Consistent rounded corners */
+    box-shadow: 0 4px 15px var(--admin-shadow-color); /* Enhanced subtle shadow */
+    border: 1px solid var(--card-border); /* Subtle border */
+    margin-bottom: 20px; /* Consistent spacing */
+}
+
+/* Links */
+a, a:link, a:visited {
+    color: var(--admin-accent-color);
+    text-decoration: none; /* Remove underline by default */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--admin-accent-hover-color); /* Darker accent on hover */
+    text-decoration: underline; /* Underline on hover for clarity */
+}
+
+/* Buttons and Inputs */
+.button, input[type=submit], input[type=button], .submit-row input, a.button,
+.object-tools a.addlink, .object-tools a { /* Also include .object-tools a for consistency */
+    background-color: var(--admin-accent-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 188, 212, 0.2);
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, a.button:hover,
+.object-tools a.addlink:hover, .object-tools a:hover {
+    background-color: var(--admin-accent-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
+}
+
+.object-tools {
+    margin-top: 25px; /* Adjusted margin */
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px; /* Consistent rounded corners */
+    padding: 25px; /* Increased padding */
+    box-shadow: 0 8px 25px var(--shadow-medium); /* Enhanced shadow */
+    color: var(--text-color);
+    margin-bottom: 25px; /* Consistent spacing */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    border: 1px solid var(--card-border); /* Subtle border */
+}
+
+.card-header {
+    font-size: 1.3em; /* Slightly larger header */
+    font-weight: bold;
+    margin-bottom: 15px; /* Increased margin */
+    color: var(--text-color);
+    text-shadow: 0 0 5px var(--shadow-light);
+}
+
+.card-body p {
+    margin: 0;
+}
+
+/* Custom Buttons */
+.btn-primary {
+    background-color: var(--admin-accent-color);
+    color: var(--text-color);
+    padding: 10px 18px; /* Adjusted padding */
+    border-radius: 6px; /* Consistent rounded corners */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 15px; /* Adjusted margin */
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 188, 212, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: var(--admin-accent-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
+}
+
+/* Changelist */
+#changelist-filter {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--admin-shadow-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--card-border);
+}
+
+#changelist-filter h2, #changelist-filter h3 {
+    color: var(--text-color);
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px var(--shadow-light);
+}
+
+.change-list .filtered .results, .change-list .filtered .paginator {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--admin-shadow-color);
+    padding: 15px;
+    margin-top: 15px; /* Added margin for separation */
+    border: 1px solid var(--card-border);
+}
+
+/* Tables */
+table {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-collapse: separate; /* Allows for border-radius on cells */
+    border-spacing: 0; /* Remove space between cell borders */
+    width: 100%;
+    border-radius: 8px; /* Rounded corners for the entire table */
+    overflow: hidden; /* Ensures content respects border-radius */
+    box-shadow: 0 4px 15px var(--admin-shadow-color);
+}
+
+thead th {
+    background-color: var(--module-header-bg);
+    color: var(--text-color);
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid var(--card-border);
+}
+
+tbody td {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Lighter border for rows */
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle hover effect for rows */
+}
+
+/* Paginator */
+.paginator {
+    color: var(--text-color);
+    padding: 15px 0;
+    text-align: center;
+}
+
+.paginator a {
+    color: var(--accent-orange); /* Using accent orange for paginator links */
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.paginator a:hover {
+    background-color: var(--accent-orange);
+    color: var(--primary-bg); /* Darker text on orange hover */
+    box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+}
+
+.paginator .this-page {
+    background-color: var(--accent-orange);
+    color: var(--primary-bg);
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Actions and Search */
+/* Actions and Search */
+.actions {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px var(--admin-shadow-color);
+    border: 1px solid var(--card-border);
+}
+
+.actions select {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    -webkit-appearance: none; /* Remove default select styling */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23e0f2f7%22%20d%3D%22M287%20197.34L146.2%2056.634%205.4%20197.34c-7.8%207.8-20.5%207.8-28.3%200l-12.7-12.7c-7.8-7.8-7.8-20.5%200-28.3L132.3%2016.34c7.8-7.8%2020.5-7.8%2028.3%200l140.7%20140.7c7.8%207.8%207.8%2020.5%200%2028.3l-12.7%2012.7z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px auto;
+}
+
+.actions select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.5);
+    outline: none;
+}
+
+#changelist-search {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px var(--admin-shadow-color);
+    border: 1px solid var(--card-border);
+}
+
+#changelist-search input[type="text"] {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+    padding: 8px 12px;
+    border-radius: 5px;
+    width: calc(100% - 24px); /* Adjust width for padding */
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+#changelist-search input[type="text"]:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.5);
+    outline: none;
+}
+
+
+.object-tools a {
+    background-color: var(--accent-color);
+    color: #fff;
+}
